@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse navbar-right" id="menu">
             <ul class="nav navbar-nav">
                 <li class="<?= (esOpcionMenuActiva("index") ? "active" : ""); ?>">
-                    <a href="<?= (esOpcionMenuActiva("index") ? "#" : "/index.php"); ?>">
+                    <a href="<?= (esOpcionMenuActiva("index") ? "#" : "/"); ?>">
                         <i class="fa fa-home sr-icons"></i> Home
                     </a>
                 </li>

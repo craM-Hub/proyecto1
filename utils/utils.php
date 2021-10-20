@@ -2,7 +2,11 @@
 function esOpcionMenuActiva(string $option): bool
 {
     $uri = $_SERVER["REQUEST_URI"];
-    return (strpos($uri, $option) > 0) ? true : false;
+    if (strpos($uri, $option) > 0) {
+        return true;
+    } elseif (('/' === $uri) && ('index' == $option)) {
+        return true;
+    } else return false;
 }
 
 function  existeOpcionMenuActivaEnArray(array $options): bool
