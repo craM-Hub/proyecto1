@@ -1,34 +1,22 @@
 <?php
-
 include __DIR__ . "/partials/inicio-doc.part.php";
 include __DIR__ . "/partials/nav.part.php";
 ?>
 
-<!-- Principal Content Start -->
 <div id="galeria">
     <div class="container">
         <div class="col-xs-12 col-sm-8 col-sm-push-2">
             <h1>GALERÍA</h1>
             <hr>
-            <?php if ("POST" === $_SERVER["REQUEST_METHOD"]) : ?>
-                <div class="alert alert-<?= (empty($errores) ? 'info' : 'danger'); ?> alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">x</span>
-                    </button>
-                    <div><?= $info; ?></div>
-                    <?php if (!empty($errores)) : ?>
-                        <ul>
-                            <?php foreach ($errores as $error) : ?>
-                                <li><?= $error; ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
+
+            <?php
+            include __DIR__ . "/partials/show-messages.part.php";
+            ?>
+
             <?php if (("POST" === $_SERVER["REQUEST_METHOD"]) && (empty($errores))) : ?>
                 <a href="<?= $urlImagen ?>" target="_blank">Ver Imagen</a>
             <?php endif; ?>
-            <form class="form-horizontal" action="/galeria.php" method="POST">
+            <form class="form-horizontal" action="/galeria.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="col-xs-12">
                         <label class="label-control" for="imagen">Imagen</label>

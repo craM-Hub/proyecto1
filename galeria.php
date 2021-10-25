@@ -25,7 +25,7 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
         }
     }
 
-    if (isset($_FILES['imagen']) && ($_FILES['imagen']['error'] == UPLOAD_ERR_OK)) {
+    if (isset($_FILES['imagen']) && ($_FILES['imagen']['error'] === UPLOAD_ERR_OK)) {
         if ($_FILES['imagen']['size'] > (2 * 1024 * 1024)) {
             $errores[] = 'El archivo no puede superar los 2MB';
             $imagenErr = true;
@@ -42,15 +42,15 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
         if (!$imagenErr) {
             //mover si no hay errores
             if (false === move_uploaded_file(
-                $_FILES["imagen"]["tmp_name"],
-                "images/index/gallery/" . $_FILES["imagen"]["name"]
+                $_FILES['imagen']['tmp_name'],
+                "images/index/gallery/" . $_FILES['imagen']['name']
             )) {
                 $errores[] = "Se ha producido un error al mover la imagen";
                 $imagenErr = true;
             }
         }
     } else {
-        $errores[] = "Se ha producido un error. Código de error: " . $_FILES["imagen"]["error"];
+        $errores[] = "Se ha producido un error. Código de error: " . $_FILES['imagen']['error'];
         $imagenErr = true;
     }
 
@@ -61,7 +61,7 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
     //si no hay errores
     if (!$hayErrores) {
         $info = "Imagen enviada correctamente.";
-        $urlImagen = "images/index/gallery/" . $_FILES["imagen"]["name"];
+        $urlImagen = "images/index/gallery/" . $_FILES['imagen']['name'];
 
         //reseteamos datos del formulario
         $description = "";
