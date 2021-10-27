@@ -32,12 +32,14 @@ class File
                 case UPLOAD_ERR_FORM_SIZE:
                     throw new FileException("No se ha podido subir el fichero completo");
                     break;
+                case UPLOAD_ERR_PARTIAL:
+                    throw new FileException("No se ha podido subir el fichero completo");
                 default:
                     throw new FileException("No se ha podido subir el fichero");
             }
         }
         if (false === in_array($this->file["type"], $mimeTypes)) {
-            throw new FileException("EL tipo de fichero no está soportado");
+            throw new FileException("El tipo de fichero no está soportado");
         }
         if (($maxSize > 0) && ($this->file["size"] > $maxSize)) {
             throw new FileException("El fichero no puede superar $maxSize bytes");
