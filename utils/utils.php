@@ -24,3 +24,12 @@ function sanitizeInput(string $data): string
     $data = htmlspecialchars($data);
     return $data;
 }
+
+function getAsociados(array $asociados): array
+{
+    if (count($asociados) > 3) {
+        return array_rand($asociados, 2);
+    } else {
+        return $asociados;
+    }
+}
