@@ -10,7 +10,7 @@ include __DIR__ . "/partials/nav.part.php";
             <hr>
 
             <?php
-            include __DIR__ . "/partials/asociado.part.php";
+            include __DIR__ . "/partials/show-messages.part.php";
             ?>
 
             <?php if (("POST" === $_SERVER["REQUEST_METHOD"]) && (empty($errores))) : ?>
@@ -19,14 +19,20 @@ include __DIR__ . "/partials/nav.part.php";
             <form class="form-horizontal" action="/asociados.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <label class="label-control" for="imagen">Imagen</label>
-                        <input class="form-control-file" type="file" name="imagen">
+                        <label class="label-control" for="logo">Logo</label>
+                        <input class="form-control-file" type="file" name="logo">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <label class="label-control" for="description">Descripción</label>
-                        <textarea class="form-control" name="description" id="description"><?= $description; ?></textarea>
+                        <label class="label-control" for="nombre">Nombre</label>
+                        <input class="form-control" name="nombre" id="nombre"><?= $nombre; ?></input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <label class="label-control" for="descripcion">Descripción</label>
+                        <textarea class="form-control" name="descripcion" id="descripcion"><?= $descripcion; ?></textarea>
                         <button class="pull-right btn btn-lg sr-button">ENVIAR</button>
                     </div>
                 </div>

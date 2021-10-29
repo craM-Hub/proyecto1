@@ -1,6 +1,8 @@
 <?php
 class Asociado
 {
+
+    const RUTA_IMAGENES_LOGO = 'images/index/';
     /**
      * @var string
      */

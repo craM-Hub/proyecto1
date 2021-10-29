@@ -16,8 +16,10 @@ $galeria[] = new ImagenGaleria("10.jpg", "Descripción imagen 10", 14, 5, 3);
 $galeria[] = new ImagenGaleria("11.jpg", "Descripción imagen 11", 13, 4, 0);
 $galeria[] = new ImagenGaleria("12.jpg", "Descripción imagen 12", 15, 1, 1);
 
-$asociados[] = new Asociado("First Partner Name", "log1", "Blablablabla");
-$asociados[] = new Asociado("Second Partner Name", "log2", "Blablablabla");
-$asociados[] = new Asociado("Third Partner Name", "log3", "Blablablabla");
+$asociado[] = new Asociado("First Partner Name", "log1", "FPN Bla");
+$asociado[] = new Asociado("Second Partner Name", "log2", "SPN Blabla");
+$asociado[] = new Asociado("Third Partner Name", "log3", "TPN Blablabla");
+$asociado[] = new Asociado("Fourth Partner Name", "log3", "FPN Blablablabla");
 
+$asociado = getAsociados($asociado);
 include("./views/index.view.php");

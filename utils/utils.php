@@ -27,9 +27,6 @@ function sanitizeInput(string $data): string
 
 function getAsociados(array $asociados): array
 {
-    if (count($asociados) > 3) {
-        return array_rand($asociados, 2);
-    } else {
-        return $asociados;
-    }
+    shuffle($asociados);
+    return array_slice($asociados, 0, 3);
 }
