@@ -19,7 +19,7 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
         if (empty($_POST)) {
             throw new FileException("Se ha producido un error al procesar el formulario");
         }
-        $imageFile = new File("imagen", array("image/jpeg", "image/jpg", "image/png"), (2 * 1024 * 1024));
+        $imageFile = new File("logo", array("image/jpeg", "image/jpg", "image/png"), (2 * 1024 * 1024));
         $imageFile->saveUploadedFile(Asociado::RUTA_IMAGENES_LOGO);
         try {
 
@@ -27,7 +27,7 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
             $simpleImage = new \claviska\SimpleImage();
             $simpleImage
                 ->fromFile(Asociado::RUTA_IMAGENES_LOGO . $imageFile->getFileName())
-                ->resize(975, 525)
+                ->resize(50, 50)
                 ->toFile(Asociado::RUTA_IMAGENES_LOGO . $imageFile->getFileName());
         } catch (Exception $err) {
             $errores[] = $err->getMessage();
