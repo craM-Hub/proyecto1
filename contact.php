@@ -1,43 +1,79 @@
 <?php
-$title = "Contact";
-require_once "./utils/utils.php";
+    $title = "Contact";
+    require_once "./utils/utils.php";
+    require_once "./utils/Forms/InputElement.php";
+    require_once "./utils/Forms/EmailElement.php";
+    require_once "./utils/Forms/TextareaElement.php";
+    require_once "./utils/Forms/ButtonElement.php";
+    require_once "./utils/Forms/FormElement.php";
+    require_once "./utils/Forms/custom/MyFormGroup.php";
+    require_once "./utils/Forms/custom/MyFormControl.php";
+    require_once "./utils/Validator/NotEmptyValidator.php";
+ 
+    $info = "";
+    $firstName = new InputElement('text');
+    $firstName
+      ->setName('firstName')
+      ->setId('firstName')
+      ->setValidator(new NotEmptyValidator('El campo first name no puede estar vacío', true));
 
-$info = $firstName = $lastName = $email = $subject = $message = "";
-$firstNameError = $emailError = $subjectError = $hayErrores = false;
-$errores = [];
 
-if ("POST" === $_SERVER["REQUEST_METHOD"]) {
-    $firstName = sanitizeInput(($_POST["firstName"] ?? ""));
-    $lastName = sanitizeInput(($_POST["lastName"] ?? "")); //campo opcional
-    $email = sanitizeInput(($_POST["email"] ?? ""));
-    $subject = sanitizeInput(($_POST["subject"] ?? "")); //campo opcional
-    $message = sanitizeInput(($_POST["message"] ?? ""));
+    $lastName = new InputElement('text');
+    $lastName
+      ->setName('lastName')
+      ->setId('lastName');
 
-    //Comprobaciones
-    if (empty($firstName)) {
-        $errores[] = "El nombre es obligatorio";
-        $firstNameError = true;
+    $name = new MyFormGroup([new MyFormControl($firstName, "First Name"), new MyFormControl($lastName, "Last Name")]);
+
+    $email = new EmailElement();
+    $email
+      ->setName('email')
+      ->setId('email');
+    
+    $emailWrapper = new MyFormGroup([new MyFormControl($email, 'Correo', 'col-xs-12')]);
+
+
+    $subject = new InputElement('text');
+    $subject
+      ->setName('subject')
+      ->setId('subject')
+      ->setValidator(new NotEmptyValidator('El campo asunto no puede estar vacío', true));
+
+    $subjectWrapper = new MyFormGroup([new MyFormControl($subject, 'Asunto', 'col-xs-12')]);
+
+    $message = new TextareaElement();
+    $message
+     ->setName('message')
+     ->setId('message');
+    $messageWrapper = new MyFormGroup([new MyFormControl($message, 'Mensaje', 'col-xs-12')]);
+
+    $b = new ButtonElement('Send');
+    $b->setCssClass('pull-right btn btn-lg sr-button');
+
+    $form = new FormElement();
+    
+    $form
+     ->setCssClass('form-horizontal')
+     ->appendChild($name)
+     ->appendChild($emailWrapper)
+     ->appendChild($subjectWrapper)
+     ->appendChild($messageWrapper)
+     ->appendChild($b);
+     if ("POST" === $_SERVER["REQUEST_METHOD"]) {
+        $form->validate();
+        if (!$form->hasError()) {
+          $info = "Mensaje insertado correctamente:";
+          $form->reset();
+        }else{
+          if ($firstName->hasError()) {
+            $firstName->setCssClass($firstName->getCssClass() . ' has-error');
+          }
+          if ($subject->hasError()) {
+            $subject->setCssClass($subject->getCssClass() . ' has-error');
+          }
+          if ($email->hasError()) {
+            $email->setCssClass($email->getCssClass() . ' has-error');
+          }
+        }
     }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errores[] = "Formato inválido de correo";
-        $emailError = true;
-    }
-    if (empty($subject)) {
-        $errores[] = "El asunto es obligatorio";
-        $subjectError = true;
-    }
-    if (sizeof($errores) > 0) {
-        $hayErrores = true;
-    }
-    if (!$hayErrores) {
-        //Todo correcto
-        //insertar codigo
-        //mostrmos mensaje al usuario
-        $info = "Mensaje insertado correctamente.";
-        //reseteamos datos del formulario
-        $firstName = $lasatName = $email = $subject = $message = "";
-    } else {
-        $info = "Datos erróneos";
-    }
-}
-include("./views/contact.view.php");
+  include("./views/contact.view.php");
