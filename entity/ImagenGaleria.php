@@ -3,6 +3,13 @@ class ImagenGaleria
 {
     const RUTA_IMAGENES_PORTFOLIO = 'images/index/portfolio/';
     const RUTA_IMAGENES_GALLERY = 'images/index/gallery/';
+    
+    
+
+    /**
+     * @var int
+     */
+    private $id;
     /**
      * @var string
      */
@@ -29,15 +36,39 @@ class ImagenGaleria
     private $numDownloads;
     
 
-    public function __construct(string $nombre, string $descripcion,
-                                int $numVisualizaciones = 0, int $numLikes = 0,
-                                int $numDownloads = 0){
-        $this->nombre = $nombre;
-        $this->descripcion = $descripcion;
-        $this->numVisualizaciones = $numVisualizaciones;
-        $this->numLikes = $numLikes;
-        $this->numDownloads = $numDownloads;
+    public function __construct(string $nombre = '', string $descripcion = '',
+                            int $numVisualizaciones = 0, int $numLikes = 0,
+                            int $numDownloads = 0){
+    $this->id = null;
+    $this->nombre = $nombre;
+    $this->descripcion = $descripcion;
+    $this->numVisualizaciones = $numVisualizaciones;
+    $this->numLikes = $numLikes;
+    $this->numDownloads = $numDownloads;
 
+}
+
+    /**
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @param  int  $id
+     *
+     * @return  self
+     */ 
+
+    public function setId(int $id)
+
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**
