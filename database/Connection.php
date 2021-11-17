@@ -1,4 +1,7 @@
 <?php
+
+require_once __DIR__ . './../core/App.php';
+
 class Connection
 {
     public static function make()
@@ -6,7 +9,8 @@ class Connection
         try{
             //Fijar conexión en UTF8
             //Fijar que cuando se produzca un error salte una excepcion
-
+            $config = App::get('config')['database'];
+            
             $opciones = [
                 PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
