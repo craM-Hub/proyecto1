@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/Entity.php';
+
 class ImagenGaleria
 {
     const RUTA_IMAGENES_PORTFOLIO = 'images/index/portfolio/';
@@ -34,20 +36,34 @@ class ImagenGaleria
      * @var int
      */
     private $numDownloads;
-    
 
-    public function __construct(string $nombre = '', string $descripcion = '',
-                            int $numVisualizaciones = 0, int $numLikes = 0,
-                            int $numDownloads = 0){
-    $this->id = null;
-    $this->nombre = $nombre;
-    $this->descripcion = $descripcion;
-    $this->numVisualizaciones = $numVisualizaciones;
-    $this->numLikes = $numLikes;
-    $this->numDownloads = $numDownloads;
+    /**
+     * @var int
+     */
+    private $categoria;
 
-}
 
+
+    public function __construct(
+        string $nombre = '',
+        string $descripcion = '',
+        int $numVisualizaciones = 0,
+        int $numLikes = 0,
+        int $numDownloads = 0,
+        int $categoria = 0
+    ) {
+        $this->id = null;
+        $this->nombre = $nombre;
+        $this->descripcion = $descripcion;
+        $this->numVisualizaciones = $numVisualizaciones;
+        $this->numLikes = $numLikes;
+        $this->numDownloads = $numDownloads;
+        $this->categoria = $categoria;
+    }
+
+
+
+                            
     /**
      * @return int|null
      */
@@ -209,5 +225,42 @@ class ImagenGaleria
     public function getUrlGallery() : string
     {
         return self::RUTA_IMAGENES_GALLERY . $this->getNombre();
+    }
+
+     /** Get the value of categoria
+     *
+     * @return  int
+     */ 
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+
+    /**
+     * Set the value of categoria
+     *
+     * @param  int  $categoria
+     *
+     * @return  self
+     */ 
+
+    public function setCategoria(int $categoria)
+    {
+        $this->categoria = $categoria;
+        return $this;
+    }
+
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'nombre' => $this->getNombre(),
+            'descripcion' => $this->getDescripcion(),
+            'numVisualizaciones' => $this->getNumVisualizaciones(),
+            'numLikes' => $this->getNumLikes(),
+            'numDownloads' => $this->getNumDownloads(),
+            'categoria' => $this->getCategoria()
+        ];
     }
 }
