@@ -15,7 +15,7 @@ class ImagenGaleriaRepository extends QueryBuilder
         return $repositoryCategoria->findById($imagenGaleria->getCategoria());
     }
 
-/*     public function save(Entity $imagenGaleria)
+     public function save(Entity $imagenGaleria)
     {
         $fnGuardaImagen = function () use ($imagenGaleria){
             $categoria = $this->getCategoria($imagenGaleria);
@@ -24,5 +24,5 @@ class ImagenGaleriaRepository extends QueryBuilder
             parent::save($imagenGaleria);
         };
         $this->executeTransaction($fnGuardaImagen);
-    } */
+    }
 }

@@ -79,7 +79,7 @@ abstract class QueryBuilder
         return $result[0];
     }
 
-/*     public function executeTransaction(callable $fnExecuteQuerys)
+    public function executeTransaction(callable $fnExecuteQuerys)
     {
         try {
             $this->connection->beginTransaction();
@@ -89,13 +89,13 @@ abstract class QueryBuilder
             $this->connection->rollBack();
             throw new QueryException("No se ha podido realizar la operación: " . $pdoException->getMessage());
         }
-    } */
+    }
 
     /**
      * @param array $parameters
      * return string
      */
- /*   private function getUpdate(array $parameters): string
+    private function getUpdate(array $parameters): string
     {
         $updates = "";
         foreach ($parameters as $key => $value){
@@ -103,17 +103,17 @@ abstract class QueryBuilder
                 if($updates !== ''){
                     $updates .= ', '; 
                 }
-                $updates .= $key . '=.' . $key;
+                $updates .= $key . '=:' . $key;
             }
         }
         return $updates;
-    } */
+    }
 
     /**
      * @param Entity $entity
      * @throws QueryException
      */
-/*     public function update(Entity $entity)
+     public function update(Entity $entity)
     {
         try{
             $parameters = $entity->toArray();
@@ -122,11 +122,10 @@ abstract class QueryBuilder
                 $this->table,
                 $this->getUpdate($parameters)
             );
-
             $statement = $this->connection->prepare($sql);
             $statement->execute($parameters);
         }catch(\PDOException $pdoException){
             throw new QueryException("Error al actualizar el elemento con id {$parameters['id']}: " . $pdoException->getMessage());
         }
-    } */
+    }
 }
