@@ -38,7 +38,7 @@ include __DIR__ . "/partials/nav.part.php";
                             <td><?= $imagen->getNumVisualizaciones(); ?></td>
                             <td><?= $imagen->getNumLikes(); ?></td>
                             <td><?= $imagen->getNumDownloads(); ?></td>
-                            <td><?= $imagen->getCategoria(); ?></td>
+                            <td><?= $repositorio->getCategoria($imagen)->getNombre(); ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
