@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../exceptions/QueryException.php';
 require_once __DIR__ . '/Connection.php';
 require_once __DIR__ . '/../core/App.php';
-require_once __DIR__ . './../entity/Entity.php';
+require_once __DIR__ . '/../entity/Entity.php';
 
 abstract class QueryBuilder
 {

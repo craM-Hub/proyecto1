@@ -90,10 +90,10 @@
               $urlImagen = ImagenGaleria::RUTA_IMAGENES_GALLERY . $file->getFileName();
 
               //grabamos en la base de datos
-              $imagenGaleria = new ImagenGaleria($file->getFileName(), $description->getValue());
+              $imagenGaleria = new ImagenGaleria($file->getFileName(), $description->getValue(), 0, 0 , 0, $categoriasEl->getValue());
               $repositorio->save($imagenGaleria);
-              $info = 'Imagen enviada correctamente';
-              $urlImagen = ImagenGaleria::RUTA_IMAGENES_GALLERY . $file->getFileName();
+              //$info = 'Imagen enviada correctamente';
+              //$urlImagen = ImagenGaleria::RUTA_IMAGENES_GALLERY . $file->getFileName();
               $form->reset();
                           
           }catch(Exception $err) {
