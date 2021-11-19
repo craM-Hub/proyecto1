@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/Entity.php';
 
-class ImagenGaleria
+class ImagenGaleria extends Entity
 {
     const RUTA_IMAGENES_PORTFOLIO = 'images/index/portfolio/';
     const RUTA_IMAGENES_GALLERY = 'images/index/gallery/';

@@ -88,37 +88,23 @@
               ->toFile(ImagenGaleria::RUTA_IMAGENES_GALLERY . $file->getFileName()); 
               $info = 'Imagen enviada correctamente'; 
               $urlImagen = ImagenGaleria::RUTA_IMAGENES_GALLERY . $file->getFileName();
-              //$form->reset();
 
               //grabamos en la base de datos
               $imagenGaleria = new ImagenGaleria($file->getFileName(), $description->getValue());
               $repositorio->save($imagenGaleria);
-              
-              $connection = Connection::make(); 
-              $sql = "INSERT INTO imagenes (nombre, descripcion) VALUES (:nombre, :descripcion)";
-
-              $pdoStatement = $connection->prepare($sql);
-              $parameters = [':nombre' => $file->getFileName(),
-                            ':descripcion' => $description->getValue()];
-              
-              if (false === $pdoStatement->execute($parameters)){
-                $form->addError('No se ha podido guardar la imagen en la base de datos');
-              }else {
-                $info = 'Imagen enviada correctamente';
-                $form->reset();
-              }
-            
+              $info = 'Imagen enviada correctamente';
+              $urlImagen = ImagenGaleria::RUTA_IMAGENES_GALLERY . $file->getFileName();
+              $form->reset();
+                          
           }catch(Exception $err) {
               $form->addError($err->getMessage());
               $imagenErr = true;
           }
-        }else{
-          
         }
     }
 
     try {
-      $imagenes = $repositorio->findAll('imagenes', 'imagenGaleria');
+      $imagenes = $repositorio->findAll();
     }catch(QueryException $qe){
       $imagenes = [];
       die($qe->getMessage());

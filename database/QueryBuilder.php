@@ -51,7 +51,7 @@ abstract class QueryBuilder
         try {
             $parameters = $entity->toArray();
             $sql = sprintf(
-                'INSERT INTO %s ($s) values (%s)',
+                'INSERT INTO %s (%s) values (%s)',
                 $this->table,
                 implode(', ', array_keys($parameters)),
                 ':' . implode(', :', array_keys($parameters))

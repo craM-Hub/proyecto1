@@ -20,15 +20,10 @@ class Categoria extends Entity
 
     public function __construct(string $nombre = '', int $numImagenes = 0)
     {
-        parent::__construct();
         $this->id = null;
         $this->nombre = $nombre;
         $this->numImagenes = $numImagenes;
     }
-
-    //Setters y getters
-
-    // .....
 
     public function toArray(): array
     {
@@ -37,5 +32,77 @@ class Categoria extends Entity
             'nombre' => $this->getNombre(),
             'numImagenes' => $this->getNumImagenes()
         ];
+    }
+
+    /**
+     * Get the value of id
+     *
+     * @return  int
+     */ 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @param  int  $id
+     *
+     * @return  self
+     */ 
+    public function setId(int $id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nombre
+     *
+     * @return  string
+     */ 
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set the value of nombre
+     *
+     * @param  string  $nombre
+     *
+     * @return  self
+     */ 
+    public function setNombre(string $nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of numImagenes
+     *
+     * @return  int
+     */ 
+    public function getNumImagenes()
+    {
+        return $this->numImagenes;
+    }
+
+    /**
+     * Set the value of numImagenes
+     *
+     * @param  int  $numImagenes
+     *
+     * @return  self
+     */ 
+    public function setNumImagenes(int $numImagenes)
+    {
+        $this->numImagenes = $numImagenes;
+
+        return $this;
     }
 }
