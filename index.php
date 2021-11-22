@@ -34,6 +34,5 @@ $asociados = $repositorio->findAll();
 $asociados[] = new Asociado("Second Partner Name", "log2.jpg", "Second Partner Name");
 $asociados[] = new Asociado("Third Partner Name", "log3.jpg", "Third Partner Name");
 $asociados[] = new Asociado("Fourth Partner Name", "log1.jpg", "Fourth Partner Name"); */
-$asociados = getAsociados($asociados);
 
 include("./views/index.view.php");
