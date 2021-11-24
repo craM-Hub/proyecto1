@@ -30,6 +30,8 @@ $galeria[] = new ImagenGaleria("12.jpg", "Descripción imagen 11", 15, 1, 1); */
 $repositorio = new AsociadoRepository();
 $asociados = $repositorio->findAll();
 
+$asociados = getAsociados($asociados);
+
 /* $asociados[] = new Asociado("First Partner Name", "log1.jpg", "First Partner Name");
 $asociados[] = new Asociado("Second Partner Name", "log2.jpg", "Second Partner Name");
 $asociados[] = new Asociado("Third Partner Name", "log3.jpg", "Third Partner Name");

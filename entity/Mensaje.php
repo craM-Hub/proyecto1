@@ -15,7 +15,7 @@ class Mensaje extends Entity
         string $apellidos = "",
         string $asunto = "",
         string $email = "",
-        string $texto = "",
+        string $texto = ""
     ) {
         $this->id = null;
         $this->nombre = $nombre;
