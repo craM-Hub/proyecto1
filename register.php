@@ -74,6 +74,13 @@ if ("POST" === $_SERVER["REQUEST_METHOD"]) {
             header('location: /');
         } catch (QueryException $qe) {
             $exception = $qe->getMessage();
+            if ((strpos($exception, '1062') !== false)) {
+                $form->addError('Ya existe un usuario registrado con ese nombre');
+            } elseif ((strpos($exception, 'email') !== false)) {
+                $form->addError('Ya existe un usuario con ese correo electrónico');
+            } else {
+                $form->addError($eq->getMessage());
+            }
         } catch (Exception $err) {
             $form->addError($err->getMessage());
         }
