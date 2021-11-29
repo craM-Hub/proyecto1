@@ -1,4 +1,5 @@
 <?php
+session_start();
 $title = "Contact";
 require_once "./utils/utils.php";
 require_once "./utils/Forms/InputElement.php";
@@ -70,9 +71,13 @@ $form
 if ("POST" === $_SERVER["REQUEST_METHOD"]) {
   $form->validate();
   if (!$form->hasError()) {
-    $mensaje = new Mensaje($firstName->getValue(), 
-      $lastName->getValue(), $email->getValue(), $subject->getValue(), 
-      $message->getValue());
+    $mensaje = new Mensaje(
+      $firstName->getValue(),
+      $lastName->getValue(),
+      $email->getValue(),
+      $subject->getValue(),
+      $message->getValue()
+    );
     $repositorio->save($mensaje);
     $info = "Mensaje insertado correctamente:";
     $form->reset();
