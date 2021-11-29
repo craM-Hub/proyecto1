@@ -9,17 +9,17 @@ abstract class QueryBuilder
     /**
      * @param var $connection
      */
-    private $connection;
+    protected $connection;
 
     /**
      * @var string
      */
-    private $table;
+    protected $table;
 
     /**
      * @var string
      */
-    private $classEntity;
+    protected $classEntity;
 
     public function __construct(string $table, string $classEntity)
     {
@@ -128,10 +128,14 @@ abstract class QueryBuilder
             throw new QueryException("Error al actualizar el elemento con id {$parameters['id']}: " . $pdoException->getMessage());
         }
     }
-    public function findByUserNameAndPassword(string $username, string $password): ?Usuario
+    /*     public function findByUserNameAndPassword(string $username, string $password): Usuario
     {
         $sql = "SELECT * FROM $this->table WHERE username = :username AND password = :password";
-        $parameters = ['username' => $username, 'password' => $password];
+        $parameters = [
+            'username' => $username,
+            'password' =>
+            $this->passwordGenerator::encrypt($password)
+        ];
 
         try {
             $pdoStatement = $this->connection->prepare($sql);
@@ -146,5 +150,5 @@ abstract class QueryBuilder
             throw new QueryException('No se ha podido ejecutar la consulta solicitada');
         }
         return null;
-    }
+    } */
 }
