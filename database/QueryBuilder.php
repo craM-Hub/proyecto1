@@ -98,10 +98,10 @@ abstract class QueryBuilder
     private function getUpdate(array $parameters): string
     {
         $updates = "";
-        foreach ($parameters as $key => $value){
-            if($key !== 'id'){
-                if($updates !== ''){
-                    $updates .= ', '; 
+        foreach ($parameters as $key => $value) {
+            if ($key !== 'id') {
+                if ($updates !== '') {
+                    $updates .= ', ';
                 }
                 $updates .= $key . '=:' . $key;
             }
@@ -113,9 +113,9 @@ abstract class QueryBuilder
      * @param Entity $entity
      * @throws QueryException
      */
-     public function update(Entity $entity)
+    public function update(Entity $entity)
     {
-        try{
+        try {
             $parameters = $entity->toArray();
             $sql = sprintf(
                 'UPDATE %s SET %s WHERE id = :id',
@@ -124,8 +124,27 @@ abstract class QueryBuilder
             );
             $statement = $this->connection->prepare($sql);
             $statement->execute($parameters);
-        }catch(\PDOException $pdoException){
+        } catch (\PDOException $pdoException) {
             throw new QueryException("Error al actualizar el elemento con id {$parameters['id']}: " . $pdoException->getMessage());
         }
+    }
+    public function findByUserNameAndPassword(string $username, string $password): ?Usuario
+    {
+        $sql = "SELECT * FROM $this->table WHERE username = :username AND password = :password";
+        $parameters = ['username' => $username, 'password' => $password];
+
+        try {
+            $pdoStatement = $this->connection->prepare($sql);
+            $pdoStatement->execute($parameters);
+            $pdoStatement->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $this->classEntity);
+            $result = $pdoStatement->fetch();
+            if (empty($result)) {
+                throw new NotFoundException('No se ha encontrado ningún usuario con esas credenciales');
+            }
+            return $result;
+        } catch (PDOException $pdoException) {
+            throw new QueryException('No se ha podido ejecutar la consulta solicitada');
+        }
+        return null;
     }
 }
